@@ -12,7 +12,6 @@ export function getAnschlaege() {
         .then((response) => {
             anschlaege = response.data.entries;
             anschlaegeArray.set(anschlaege);
-            return anschlaege;
         })
         .catch((error) => {
             console.error(error);

@@ -1,6 +1,8 @@
 <script>
-  import { anschlaegeArray } from "../stores/anschlagStore.js";
-  import { api } from "../services/api.js";
+  import { anschlaegeArray, currentAnschlag } from "../stores/anschlagStore.js";
+  import AnschlagDetail from "../components/AnschlagDetail.svelte";
+  import AnschlagItem from "../components/AnschlagItem.svelte";
+  import { slide } from "svelte/transition";
 
   let anschlaege = [];
 
@@ -9,20 +11,24 @@
   });
 
   function choose(params) {
-    alert(params);
+    currentAnschlag.set(anschlaege.find((item) => item._id === params));
   }
 </script>
 
 <div id="content">
   <div id="sidebar" class="col-3 col-s-12">
     {#each anschlaege as anschlag}
-      <div class="sidebarElement" on:click={() => choose(anschlag._id)}>
-        {anschlag.title}
+      <div transition:slide|local>
+        <AnschlagItem
+          title={anschlag.title}
+          id={anschlag._id}
+          on:click={() => choose(anschlag._id)}
+        />
       </div>
     {/each}
   </div>
   <div id="details" class="col-9 col-s-12">
-    <h1>Content</h1>
+    <AnschlagDetail />
   </div>
 </div>
 
@@ -41,6 +47,7 @@
     overflow-y: scroll;
     flex-direction: column;
     flex: 1;
+    cursor: pointer;
   }
 
   #details {
