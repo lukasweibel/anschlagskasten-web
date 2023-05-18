@@ -15,6 +15,10 @@
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   #container {
     border: solid black 2px;
     height: 100%;
