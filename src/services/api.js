@@ -1,4 +1,5 @@
 import axios from "axios";
+import { anschlaegeArray } from "../stores/anschlagStore.js";
 
 const baseUrl = "https://4ecb53c6.eu-gb.apigw.appdomain.cloud/anschlagskasten-test"
 
@@ -10,11 +11,12 @@ export function getAnschlaege() {
         )
         .then((response) => {
             anschlaege = response.data.entries;
+            anschlaegeArray.set(anschlaege);
+            return anschlaege;
         })
         .catch((error) => {
             console.error(error);
         });
-    return anschlaege;
 }
 
 export function initializeApp() {

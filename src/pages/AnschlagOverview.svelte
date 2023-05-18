@@ -1,27 +1,16 @@
 <script>
-  import axios from "axios";
-  import { city } from "../stores/anschlagStore.js";
+  import { anschlaegeArray } from "../stores/anschlagStore.js";
   import { api } from "../services/api.js";
 
   let anschlaege = [];
 
-  anschlaege = api.getAnschlaege();
+  anschlaegeArray.subscribe((value) => {
+    anschlaege = value;
+  });
 
   function choose(params) {
     alert(params);
   }
-
-  axios
-    .get(
-      "https://4ecb53c6.eu-gb.apigw.appdomain.cloud/anschlagskasten-test/anschlaege"
-    )
-    .then((response) => {
-      console.log(response.data.entries);
-      anschlaege = response.data.entries;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 </script>
 
 <div id="content">
@@ -34,7 +23,6 @@
   </div>
   <div id="details" class="col-9 col-s-12">
     <h1>Content</h1>
-    <p>{city}</p>
   </div>
 </div>
 

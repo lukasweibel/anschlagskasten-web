@@ -1,6 +1,9 @@
 <script>
   import Router from "svelte-spa-router";
   import routes from "./routes";
+  import { api } from "./services/api.js";
+
+  api.getAnschlaege();
 </script>
 
 <div id="container">
