@@ -1,5 +1,5 @@
 <script>
-  import { anschlaegeArray, currentAnschlag } from "../stores/anschlagStore.js";
+  import { anschlaegeArray, currentAnschlag } from "../stores/store.js";
   import AnschlagDetail from "../components/AnschlagDetail.svelte";
   import AnschlagItem from "../components/AnschlagItem.svelte";
   import { slide } from "svelte/transition";

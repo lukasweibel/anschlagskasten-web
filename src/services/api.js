@@ -1,7 +1,7 @@
 import axios from "axios";
-import { anschlaegeArray } from "../stores/anschlagStore.js";
+import { anschlaegeArray, personsArray } from "../stores/store.js";
 
-const baseUrl = "https://4ecb53c6.eu-gb.apigw.appdomain.cloud/anschlagskasten-test"
+const baseUrl = "http://localhost:8081"
 
 export function getAnschlaege() {
     let anschlaege = [];
@@ -10,8 +10,37 @@ export function getAnschlaege() {
             baseUrl + "/anschlaege"
         )
         .then((response) => {
-            anschlaege = response.data.entries;
+            anschlaege = response.data;
             anschlaegeArray.set(anschlaege);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+export function getPersons() {
+    let persons = [];
+    axios
+        .get(
+            baseUrl + "/persons"
+        )
+        .then((response) => {
+            persons = response.data;
+            personsArray.set(persons);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+export function saveAnschlag(anschlag) {
+    axios
+        .post(
+            baseUrl + "/anschlaege", anschlag
+        )
+        .then((response) => {
+            console.log(response);
+            getAnschlaege();
         })
         .catch((error) => {
             console.error(error);
@@ -23,5 +52,7 @@ export function initializeApp() {
 }
 
 export const api = {
-    getAnschlaege
+    getAnschlaege,
+    getPersons,
+    saveAnschlag
 };

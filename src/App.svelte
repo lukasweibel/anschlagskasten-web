@@ -10,6 +10,7 @@
   <nav id="navbar">
     <a href="#/">Home</a>
     <a href="#/anschlagform">Anschlag erstellen</a>
+    <a href="#/persons">Personen</a>
   </nav>
 
   <div id="content">
