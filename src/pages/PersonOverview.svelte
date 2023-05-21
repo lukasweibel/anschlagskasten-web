@@ -1,7 +1,6 @@
 <script>
   import { personsArray } from "../stores/store.js";
   import { api } from "../services/api.js";
-  import { slide } from "svelte/transition";
 
   api.getPersons();
 

@@ -2,7 +2,7 @@
   import { currentAnschlag } from "../stores/store.js";
 
   let anschlag = {
-    title: "test",
+    title: null,
   };
 
   currentAnschlag.subscribe((value) => {

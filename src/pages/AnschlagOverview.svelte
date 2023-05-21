@@ -3,6 +3,7 @@
   import AnschlagDetail from "../components/AnschlagDetail.svelte";
   import AnschlagItem from "../components/AnschlagItem.svelte";
   import { slide } from "svelte/transition";
+  import CommentSection from "../components/CommentSection.svelte";
 
   let anschlaege = [];
 
@@ -27,8 +28,11 @@
       </div>
     {/each}
   </div>
-  <div id="details" class="col-9 col-s-12">
+  <div id="details" class="col-6 col-s-12">
     <AnschlagDetail />
+  </div>
+  <div id="commentSection" class="col-3 col-s-12">
+    <CommentSection />
   </div>
 </div>
 
@@ -51,6 +55,10 @@
   }
 
   #details {
+  }
+
+  #commentSection {
+    border-left: black solid 1px;
   }
 
   @media only screen and (max-width: 768px) {

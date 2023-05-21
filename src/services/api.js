@@ -34,17 +34,37 @@ export function getPersons() {
 }
 
 export function saveAnschlag(anschlag) {
-    axios
-        .post(
-            baseUrl + "/anschlaege", anschlag
-        )
-        .then((response) => {
-            console.log(response);
-            getAnschlaege();
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    return new Promise((resolve, reject) => {
+        axios
+            .post(
+                baseUrl + "/anschlaege", anschlag
+            )
+            .then((response) => {
+                console.log(response);
+                getAnschlaege();
+                resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
+}
+
+export function saveComment(anschlag) {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(
+                baseUrl + "/anschlaege", anschlag
+            )
+            .then((response) => {
+                console.log(response);
+                getAnschlaege();
+                resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
 }
 
 export function initializeApp() {
@@ -54,5 +74,6 @@ export function initializeApp() {
 export const api = {
     getAnschlaege,
     getPersons,
-    saveAnschlag
+    saveAnschlag,
+    saveComment
 };
