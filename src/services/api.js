@@ -50,11 +50,11 @@ export function saveAnschlag(anschlag) {
     });
 }
 
-export function saveComment(anschlag) {
+export function saveComment(id, newComment) {
     return new Promise((resolve, reject) => {
         axios
-            .put(
-                baseUrl + "/anschlaege", anschlag
+            .post(
+                baseUrl + "/anschlaege/comment/" + id, newComment
             )
             .then((response) => {
                 console.log(response);

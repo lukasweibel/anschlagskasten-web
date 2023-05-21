@@ -6,18 +6,13 @@
   let anschlag = {
     _id: null,
     title: null,
-    comments: [
-      {
-        name: null,
-        text: null,
-        timestamp: null,
-      },
-    ],
+    comments: [],
   };
 
   let newComment = {
     text: null,
     name: null,
+    timestamp: null,
   };
 
   currentAnschlag.subscribe((value) => {
@@ -25,10 +20,18 @@
   });
 
   function save() {
-    anschlag.comments.push(newComment);
-    api.saveComment(anschlag);
-    console.log(anschlag);
-    anschlag = { ...anschlag };
+    newComment.timestamp = Date.now();
+    if (newComment.name && newComment.text && newComment.timestamp) {
+      anschlag.comments.push({ ...newComment });
+      anschlag = { ...anschlag };
+      api.saveComment(anschlag._id, newComment).then(() => {
+        newComment.name = null;
+        newComment.text = null;
+        newComment.timestamp = null;
+      });
+    } else {
+      alert("Bitte alle Felder ausfüllern");
+    }
   }
 </script>
 
@@ -40,8 +43,6 @@
 
 <input type="text" placeholder="Text" bind:value={newComment.text} />
 
+<input type="text" placeholder="Name" bind:value={newComment.name} />
+
 <button on:click={save}>Kommentar speichern</button>
-
-{JSON.stringify(newComment, null, 2)}
-
-{JSON.stringify(anschlag, null, 2)}
