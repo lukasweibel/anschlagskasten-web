@@ -1,5 +1,5 @@
 <script>
-  import { anschlaegeArray, currentAnschlag } from "../stores/store.js";
+  import { activeAnschlaege, currentAnschlag } from "../stores/store.js";
   import AnschlagDetail from "../components/AnschlagDetail.svelte";
   import AnschlagItem from "../components/AnschlagItem.svelte";
   import { slide } from "svelte/transition";
@@ -7,8 +7,14 @@
 
   let anschlaege = [];
 
-  anschlaegeArray.subscribe((value) => {
+  let anschlag = null;
+
+  activeAnschlaege.subscribe((value) => {
     anschlaege = value;
+  });
+
+  currentAnschlag.subscribe((value) => {
+    anschlag = value;
   });
 
   function choose(params) {
@@ -28,12 +34,14 @@
       </div>
     {/each}
   </div>
-  <div id="details" class="col-6 col-s-12">
-    <AnschlagDetail />
-  </div>
-  <div id="commentSection" class="col-3 col-s-12">
-    <CommentSection />
-  </div>
+  {#if anschlag != null}
+    <div id="details" class="col-6 col-s-12">
+      <AnschlagDetail />
+    </div>
+    <div id="commentSection" class="col-3 col-s-12">
+      <CommentSection />
+    </div>
+  {/if}
 </div>
 
 <style>

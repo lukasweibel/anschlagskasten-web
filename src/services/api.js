@@ -1,5 +1,6 @@
 import axios from "axios";
-import { anschlaegeArray, personsArray } from "../stores/store.js";
+import { activeAnschlaege } from "../stores/store.js";
+import { personsArray, allAnschlaege } from "../stores/personstore.js";
 
 const baseUrl = "http://localhost:8081"
 
@@ -11,7 +12,8 @@ export function getAnschlaege() {
         )
         .then((response) => {
             anschlaege = response.data;
-            anschlaegeArray.set(anschlaege);
+            activeAnschlaege.set(anschlaege);
+            allAnschlaege.set(anschlaege);
         })
         .catch((error) => {
             console.error(error);
