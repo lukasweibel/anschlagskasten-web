@@ -23,30 +23,27 @@
     box-sizing: border-box;
   }
 
-  @media only screen and (min-width: 768px) {
-    #container {
-      border: solid black 2px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+  html,
+  body {
+    height: 100%;
+    margin: 0;
   }
-  @media only screen and (max-width: 768px) {
-    #container {
-      border: solid black 2px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-    }
+
+  #container {
+    border: solid black 2px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   #navbar {
-    width: 100%;
-    height: 80px;
+    flex: 0 0 auto; /* Let the navbar size itself based on content */
+    min-height: 60px;
     border-bottom: black solid 2px;
   }
 
   #content {
-    height: 100%;
+    flex: 1 1 auto; /* Allow the content to grow and shrink as needed */
+    overflow-y: auto; /* Enable vertical scrolling when necessary */
   }
 </style>

@@ -55,12 +55,10 @@
   }
 
   #sidebar {
-    flex: 0 0 auto;
     border-right: solid black 2px;
     overflow-y: scroll;
     flex-direction: column;
     cursor: pointer;
-    margin-bottom: 0px;
   }
 
   #details {
@@ -112,7 +110,7 @@
 
     #sidebar {
       border-right: none;
-      overflow-y: scroll;
+      overflow-x: scroll;
     }
     #content {
       display: block;
