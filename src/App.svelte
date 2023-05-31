@@ -23,11 +23,21 @@
     box-sizing: border-box;
   }
 
-  #container {
-    border: solid black 2px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  @media only screen and (min-width: 768px) {
+    #container {
+      border: solid black 2px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    #container {
+      border: solid black 2px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   #navbar {

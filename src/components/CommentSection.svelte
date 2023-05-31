@@ -1,13 +1,6 @@
 <script>
-  import { comment } from "svelte/internal";
   import { currentAnschlag } from "../stores/store.js";
   import { api } from "../services/api.js";
-
-  let anschlag = {
-    _id: null,
-    title: null,
-    comments: [],
-  };
 
   let newComment = {
     text: null,
@@ -15,16 +8,12 @@
     timestamp: null,
   };
 
-  currentAnschlag.subscribe((value) => {
-    anschlag = value || anschlag;
-  });
-
   function save() {
     newComment.timestamp = Date.now();
     if (newComment.name && newComment.text && newComment.timestamp) {
-      anschlag.comments.push({ ...newComment });
-      anschlag = { ...anschlag };
-      api.saveComment(anschlag._id, newComment).then(() => {
+      $currentAnschlag.comments.push({ ...newComment });
+      $currentAnschlag = { ...$currentAnschlag };
+      api.saveComment($currentAnschlag._id, newComment).then(() => {
         newComment.name = null;
         newComment.text = null;
         newComment.timestamp = null;
@@ -35,8 +24,8 @@
   }
 </script>
 
-{#if anschlag.comments != null}
-  {#each anschlag.comments as comment}
+{#if $currentAnschlag.comments != null}
+  {#each $currentAnschlag.comments as comment}
     <div>{comment.text}{comment.name}</div>
   {/each}
 {/if}

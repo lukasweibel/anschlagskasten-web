@@ -55,11 +55,12 @@
   }
 
   #sidebar {
+    flex: 0 0 auto;
     border-right: solid black 2px;
     overflow-y: scroll;
     flex-direction: column;
-    flex: 1;
     cursor: pointer;
+    margin-bottom: 0px;
   }
 
   #details {
@@ -67,6 +68,7 @@
 
   #commentSection {
     border-left: black solid 1px;
+    overflow-y: scroll;
   }
 
   @media only screen and (max-width: 768px) {
@@ -109,12 +111,17 @@
     }
 
     #sidebar {
-      border-bottom: solid black 2px;
       border-right: none;
       overflow-y: scroll;
     }
     #content {
       display: block;
+      height: auto;
+    }
+
+    #commentSection {
+      border-left: none;
+      border-top: solid black 2px;
     }
   }
 

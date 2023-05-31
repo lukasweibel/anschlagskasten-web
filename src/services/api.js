@@ -1,6 +1,6 @@
 import axios from "axios";
 import { activeAnschlaege } from "../stores/store.js";
-import { personsArray, allAnschlaege } from "../stores/personstore.js";
+import { personsArray, orderedAnschlaege } from "../stores/personstore.js";
 
 const baseUrl = "http://localhost:8081"
 
@@ -13,7 +13,21 @@ export function getAnschlaege() {
         .then((response) => {
             anschlaege = response.data;
             activeAnschlaege.set(anschlaege);
-            allAnschlaege.set(anschlaege);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+export function getOrderedAnschlaege() {
+    let anschlaege = [];
+    axios
+        .get(
+            baseUrl + "/anschlaege/ordered"
+        )
+        .then((response) => {
+            anschlaege = response.data;
+            orderedAnschlaege.set(anschlaege);
         })
         .catch((error) => {
             console.error(error);
@@ -69,13 +83,44 @@ export function saveComment(id, newComment) {
     });
 }
 
-export function initializeApp() {
+export function addAnschlagToPerson(personId, anschlagId) {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(
+                baseUrl + "/persons/add/" + personId + "/" + anschlagId
+            )
+            .then((response) => {
+                console.log(response);
+                resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
+}
 
+export function removeAnschlagFromPerson(personId, anschlagId) {
+    return new Promise((resolve, reject) => {
+        axios
+            .delete(
+                baseUrl + "/persons/remove/" + personId + "/" + anschlagId
+            )
+            .then((response) => {
+                console.log(response);
+                resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
 }
 
 export const api = {
     getAnschlaege,
     getPersons,
     saveAnschlag,
-    saveComment
+    saveComment,
+    getOrderedAnschlaege,
+    addAnschlagToPerson,
+    removeAnschlagFromPerson
 };
