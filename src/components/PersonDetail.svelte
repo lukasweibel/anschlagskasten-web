@@ -14,12 +14,14 @@
 </script>
 
 {#if $currentUser != null}
-  <h1>{$currentUser.vulgo}</h1>
+  <h4>
+    Anweseinheit von {$currentUser.vulgo} bei der Stufe {$currentUser.stufe}
+  </h4>
 
   {#if $orderedAnschlaege != null}
     {#each $orderedAnschlaege as stufenAnschlaege}
-      {#if stufenAnschlaege._id == $currentUser.stufe}
-        <h1>{stufenAnschlaege._id}</h1>
+      {#if stufenAnschlaege.title == $currentUser.stufe}
+        <h1>{stufenAnschlaege.title}</h1>
         {#each stufenAnschlaege.years as anschlaegePerYear}
           <div>
             <h1>{anschlaegePerYear.year}</h1>

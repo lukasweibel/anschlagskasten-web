@@ -40,6 +40,15 @@
     flex: 0 0 auto; /* Let the navbar size itself based on content */
     min-height: 60px;
     border-bottom: black solid 2px;
+    background-color: rgb(166, 40, 52);
+  }
+
+  a {
+    color: black;
+    font-size: 36px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: auto;
   }
 
   #content {

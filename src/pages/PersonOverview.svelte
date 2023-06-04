@@ -14,16 +14,6 @@
   function choose(params) {
     currentUser.set(params);
   }
-
-  /*function choose(params) {
-    $userAnschlaege = [...[]];
-    for (let param of params) {
-      let anschlag = $allAnschlaege.find(
-        (item) => item._id === param.anschlagId
-      );
-      $userAnschlaege = [...$userAnschlaege, anschlag];
-    }
-  }*/
 </script>
 
 <div id="content">
@@ -39,7 +29,7 @@
       {/each}
     {/if}
   </div>
-  <div id="details" class="col-6 col-s-12">
+  <div id="details" class="col-9 col-s-12">
     <PersonDetail />
   </div>
 </div>
@@ -63,6 +53,7 @@
   }
 
   #details {
+    overflow-y: scroll;
   }
 
   @media only screen and (max-width: 768px) {

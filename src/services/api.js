@@ -28,6 +28,8 @@ export function getOrderedAnschlaege() {
         .then((response) => {
             anschlaege = response.data;
             orderedAnschlaege.set(anschlaege);
+            console.log(orderedAnschlaege)
+
         })
         .catch((error) => {
             console.error(error);
