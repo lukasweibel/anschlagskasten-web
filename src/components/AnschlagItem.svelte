@@ -31,6 +31,8 @@
   }
 
   p {
+    margin-top: 0px;
+    margin-bottom: 0px;
     margin-left: 5px;
   }
 

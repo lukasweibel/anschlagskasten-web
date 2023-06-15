@@ -22,16 +22,82 @@
       alert("Bitte alle Felder ausfüllern");
     }
   }
+
+  function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("de-DE"); // Set the desired locale, e.g., 'de-DE' for German
+  }
 </script>
 
-{#if $currentAnschlag.comments != null}
-  {#each $currentAnschlag.comments as comment}
-    <div>{comment.text}{comment.name}</div>
-  {/each}
-{/if}
+<div id="container">
+  {#if $currentAnschlag.comments != null}
+    {#each $currentAnschlag.comments as comment}
+      <div class="comment">
+        <p class="text">{comment.text}</p>
+        <p class="name">{comment.name}</p>
+        <p class="date">{formatDate(comment.timestamp)}</p>
+      </div>
+    {/each}
+  {/if}
 
-<input type="text" placeholder="Text" bind:value={newComment.text} />
+  <div id="form">
+    <div class="input-container">
+      <input type="text" placeholder="Text" bind:value={newComment.text} />
+    </div>
+    <div class="input-container">
+      <input type="text" placeholder="Name" bind:value={newComment.name} />
+    </div>
+    <div class="button-container">
+      <button on:click={save}>speichern</button>
+    </div>
+  </div>
+</div>
 
-<input type="text" placeholder="Name" bind:value={newComment.name} />
+<style>
+  #container {
+    background-color: rgb(177, 174, 174);
+    min-height: 100%;
+  }
 
-<button on:click={save}>Kommentar speichern</button>
+  .comment {
+    border-bottom: 2px solid black;
+  }
+
+  .comment p {
+    margin-left: 5px;
+    margin-bottom: 0px;
+  }
+
+  .name {
+    color: grey;
+  }
+
+  .date {
+    color: grey;
+  }
+
+  #form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-column-gap: 10px;
+  }
+
+  .input-container {
+    margin: 5px;
+  }
+
+  .input-container:nth-child(1) {
+    grid-column: 1 / span 2;
+  }
+
+  .button-container {
+    grid-column: 2 / span 1;
+    display: flex;
+    align-items: flex-end;
+    margin: 5px;
+  }
+
+  input {
+    width: 100%;
+  }
+</style>

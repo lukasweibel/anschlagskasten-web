@@ -3,12 +3,10 @@
   import AnschlagCard from "./AnschlagCard.svelte";
 
   function isIn(params, test) {
-    console.log("vulgo: " + test.vulgo);
     const programIds = $currentUser.programs.map(
       (program) => program.anschlagId
     );
     const isIdInPrograms = programIds.includes(params._id);
-    console.log(isIdInPrograms);
     return isIdInPrograms;
   }
 </script>
@@ -21,15 +19,39 @@
   {#if $orderedAnschlaege != null}
     {#each $orderedAnschlaege as stufenAnschlaege}
       {#if stufenAnschlaege.title == $currentUser.stufe}
-        <h1>{stufenAnschlaege.title}</h1>
-        {#each stufenAnschlaege.years as anschlaegePerYear}
-          <div>
-            <h1>{anschlaegePerYear.year}</h1>
-          </div>
-          {#each anschlaegePerYear.documents as anschlag}
-            <AnschlagCard {anschlag} isIn={isIn(anschlag, $currentUser)} />
+        <div class="accordion" id="accordionExample">
+          {#each stufenAnschlaege.years as anschlaegePerYear}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading{anschlaegePerYear.year}">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapse{anschlaegePerYear.year}"
+                  aria-expanded="true"
+                  aria-controls="collapse{anschlaegePerYear.year}"
+                >
+                  {anschlaegePerYear.year}
+                </button>
+              </h2>
+              <div
+                id="collapse{anschlaegePerYear.year}"
+                class="accordion-collapse collapse"
+                aria-labelledby="heading{anschlaegePerYear.year}"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  {#each anschlaegePerYear.documents as anschlag}
+                    <AnschlagCard
+                      {anschlag}
+                      isIn={isIn(anschlag, $currentUser)}
+                    />
+                  {/each}
+                </div>
+              </div>
+            </div>
           {/each}
-        {/each}
+        </div>
       {/if}
     {/each}
   {/if}

@@ -30,10 +30,9 @@
   }
 </script>
 
-<div class={divClass}>
+<div class={divClass} id="container">
   <p>{anschlag.title}</p>
   <p>{anschlag.date}</p>
-  <p>{isIn}</p>
   <button on:click={toggle}>An/abmelden</button>
 </div>
 
@@ -44,5 +43,15 @@
 
   .red {
     background-color: rgb(221, 121, 121);
+  }
+
+  #container {
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  button {
+    margin-bottom: 5px;
+    margin-left: 5px;
   }
 </style>
