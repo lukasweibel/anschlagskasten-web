@@ -1,6 +1,7 @@
 <script>
-  import { currentAnschlag } from "../stores/store.js";
+  import { currentAnschlag } from "../stores/anschlagstore.js";
   import { api } from "../services/api.js";
+  import { common } from "../services/common.js";
 
   let newComment = {
     text: null,
@@ -22,11 +23,6 @@
       alert("Bitte alle Felder ausfüllern");
     }
   }
-
-  function formatDate(timestamp) {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString("de-DE"); // Set the desired locale, e.g., 'de-DE' for German
-  }
 </script>
 
 <div id="container">
@@ -34,8 +30,8 @@
     {#each $currentAnschlag.comments as comment}
       <div class="comment">
         <p class="text">{comment.text}</p>
-        <p class="name">{comment.name}</p>
-        <p class="date">{formatDate(comment.timestamp)}</p>
+        <p class="greytext">{comment.name}</p>
+        <p class="greytext">{common.formatDate(comment.timestamp)}</p>
       </div>
     {/each}
   {/if}
@@ -66,14 +62,6 @@
   .comment p {
     margin-left: 5px;
     margin-bottom: 0px;
-  }
-
-  .name {
-    color: grey;
-  }
-
-  .date {
-    color: grey;
   }
 
   #form {

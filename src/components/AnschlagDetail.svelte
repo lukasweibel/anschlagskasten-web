@@ -1,8 +1,68 @@
 <script>
-  import { currentAnschlag } from "../stores/store.js";
+  import { currentAnschlag } from "../stores/anschlagstore.js";
+  import { common } from "../services/common.js";
+
+  function edit() {
+    window.location.href = "#/anschlagupdate";
+  }
 </script>
 
-<h1>Test</h1>
 {#if $currentAnschlag}
-  {$currentAnschlag.title}
+  <h1>{$currentAnschlag.title}</h1>
+  <p class="greytext">
+    Anschlag erstellt am {#if $currentAnschlag.createDate}{common.formatDate(
+        $currentAnschlag.createDate
+      )}{:else}-{/if}
+    von {#if $currentAnschlag.name}{$currentAnschlag.name}{:else}-{/if}
+  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td>Datum:</td>
+        <td
+          >{#if $currentAnschlag.date}{common.formatDate(
+              $currentAnschlag.date
+            )}{:else}-{/if}</td
+        >
+      </tr>
+      <tr>
+        <td>Begrüssung:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.introducing)}</td>
+      </tr>
+      <tr>
+        <td>Besammeln, Zeit:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.startTime)}</td>
+      </tr>
+      <tr>
+        <td>Besammeln, Ort:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.startPlace)}</td>
+      </tr>
+      <tr>
+        <td>Schluss, Zeit:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.endTime)}</td>
+      </tr>
+      <tr>
+        <td>Schluss, Ort:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.endPlace)}</td>
+      </tr>
+      <tr>
+        <td>Mitnehmen:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.itemsToBring)}</td>
+      </tr>
+      <tr>
+        <td>Schlusswort:</td>
+        <td>{common.nullCheckForDisplay($currentAnschlag.finalWord)}</td>
+      </tr>
+    </tbody>
+  </table>
 {/if}
+
+<button on:click|once={edit} id="editButton">Editieren</button>
+
+<style>
+  #editButton {
+    background: none;
+    border: none;
+    color: grey;
+  }
+</style>

@@ -1,5 +1,5 @@
 <script>
-  import { currentAnschlag } from "../stores/store.js";
+  import { currentAnschlag } from "../stores/anschlagstore.js";
 
   export let title;
   export let id;

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { activeAnschlaege } from "../stores/store.js";
+import { activeAnschlaege } from "../stores/anschlagstore.js";
 import { personsArray, orderedAnschlaege } from "../stores/personstore.js";
+import { common } from "./common.js";
 
 const baseUrl = "http://localhost:8081"
 
@@ -58,12 +59,33 @@ export function saveAnschlag(anschlag) {
                 baseUrl + "/anschlaege", anschlag
             )
             .then((response) => {
-                console.log(response);
+                const id = response.data;
+
+                common.setCookie();
+
                 getAnschlaege();
                 resolve(resolve);
             })
             .catch((error) => {
                 console.error(error);
+            });
+    });
+}
+
+export function updateAnschlag(anschlag) {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(
+                baseUrl + "/anschlaege", anschlag
+            )
+            .then((response) => {
+                console.log(response);
+                getAnschlaege();
+                resolve(resolve);
+            })
+            .catch((error) => {
+                reject();
+                //console.error(error);
             });
     });
 }
@@ -124,5 +146,6 @@ export const api = {
     saveComment,
     getOrderedAnschlaege,
     addAnschlagToPerson,
-    removeAnschlagFromPerson
+    removeAnschlagFromPerson,
+    updateAnschlag
 };

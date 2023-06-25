@@ -6,4 +6,5 @@ export default {
     '/': AnschlagOverview,
     '/anschlagform': AnschlagForm,
     '/persons': PersonOverview,
+    '/anschlagupdate': AnschlagForm
 }

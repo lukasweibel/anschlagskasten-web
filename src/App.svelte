@@ -2,8 +2,11 @@
   import Router from "svelte-spa-router";
   import routes from "./routes";
   import { api } from "./services/api.js";
+  import { onMount } from "svelte";
 
-  api.getAnschlaege();
+  onMount(async () => {
+    api.getAnschlaege();
+  });
 </script>
 
 <head>
@@ -21,10 +24,29 @@
 </head>
 
 <div id="container">
-  <nav id="navbar">
-    <a href="#/">Home</a>
-    <a href="#/anschlagform">Anschlag erstellen</a>
-    <a href="#/persons">Personen</a>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" />
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#/"
+          ><img src="cevilogo.png" alt="background image" height="60px" /></a
+        >
+        <a class="nav-item nav-link" href="#/anschlagform">Anschlag erstellen</a
+        >
+        <a class="nav-item nav-link" href="#/persons">Personen</a>
+      </div>
+    </div>
   </nav>
 
   <div id="content">
@@ -50,7 +72,7 @@
     flex-direction: column;
   }
 
-  #navbar {
+  .navbar {
     flex: 0 0 auto; /* Let the navbar size itself based on content */
     min-height: 60px;
     border-bottom: black solid 2px;
@@ -67,11 +89,5 @@
   #content {
     flex: 1 1 auto; /* Allow the content to grow and shrink as needed */
     overflow-y: auto; /* Enable vertical scrolling when necessary */
-  }
-
-  @media only screen and (max-width: 768px) {
-  }
-
-  @media only screen and (min-width: 768px) {
   }
 </style>

@@ -69,3 +69,7 @@ button:focus {
 *:focus {
     outline: none;
 }
+
+.greytext {
+    color: grey;
+}
