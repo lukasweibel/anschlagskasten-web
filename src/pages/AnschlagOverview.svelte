@@ -48,10 +48,6 @@
 </div>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
-
   #content {
     display: flex;
     height: 100%;
@@ -62,14 +58,6 @@
     overflow-y: scroll;
     flex-direction: column;
     cursor: pointer;
-  }
-
-  #details {
-  }
-
-  #commentSection {
-    border-left: black solid 1px;
-    overflow-y: scroll;
   }
 
   @media only screen and (max-width: 768px) {
@@ -121,8 +109,8 @@
     }
 
     #commentSection {
-      border-left: none;
-      border-top: solid black 2px;
+      border-top: black solid 2px;
+      overflow-y: scroll;
     }
   }
 
@@ -167,6 +155,11 @@
 
     #sidebar {
       border-right: solid black 2px;
+      overflow-y: scroll;
+    }
+
+    #commentSection {
+      border-left: black solid 2px;
       overflow-y: scroll;
     }
   }

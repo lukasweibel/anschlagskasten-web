@@ -73,3 +73,12 @@ button:focus {
 .greytext {
     color: grey;
 }
+
+table {
+    width: 100%;
+}
+
+.contentWrapper {
+    margin-top: 10px;
+    margin-left: 15px;
+}

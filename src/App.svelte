@@ -65,13 +65,6 @@
     margin: 0;
   }
 
-  #container {
-    border: solid black 2px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
   .navbar {
     flex: 0 0 auto; /* Let the navbar size itself based on content */
     min-height: 60px;
@@ -89,5 +82,23 @@
   #content {
     flex: 1 1 auto; /* Allow the content to grow and shrink as needed */
     overflow-y: auto; /* Enable vertical scrolling when necessary */
+  }
+
+  @media only screen and (max-width: 768px) {
+    #container {
+      border: solid black 2px;
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    #container {
+      border: solid black 2px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>

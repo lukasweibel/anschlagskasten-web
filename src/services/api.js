@@ -29,8 +29,6 @@ export function getOrderedAnschlaege() {
         .then((response) => {
             anschlaege = response.data;
             orderedAnschlaege.set(anschlaege);
-            console.log(anschlaege)
-
         })
         .catch((error) => {
             console.error(error);
@@ -61,7 +59,7 @@ export function saveAnschlag(anschlag) {
             .then((response) => {
                 const id = response.data;
 
-                common.setCookie();
+                common.setCookie(id, anschlag.updateToken);
 
                 getAnschlaege();
                 resolve(resolve);
