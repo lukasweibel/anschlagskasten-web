@@ -3,7 +3,8 @@ import { activeAnschlaege } from "../stores/anschlagstore.js";
 import { personsArray, orderedAnschlaege } from "../stores/personstore.js";
 import { common } from "./common.js";
 
-const baseUrl = "http://localhost:8081"
+//const baseUrl = "http://localhost:8081"
+const baseUrl = "https://anschlagskasten-backend-52db9d906840.herokuapp.com"
 
 export function getAnschlaege() {
     let anschlaege = [];
