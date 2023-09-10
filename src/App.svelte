@@ -3,9 +3,17 @@
   import routes from "./routes";
   import { api } from "./services/api.js";
   import { onMount } from "svelte";
+  import { accessToken } from "./stores/userstore";
+  import { common } from "./services/common";
 
   onMount(async () => {
     api.getAnschlaege();
+    if (common.getUrlParameter("code")) {
+      api.getAccessToken(common.getUrlParameter("code")).then((response) => {
+        common.removeQueryParam("code");
+        $accessToken = response;
+      });
+    }
   });
 </script>
 
@@ -45,7 +53,13 @@
         <a class="nav-item nav-link" href="#/anschlagform">Anschlag erstellen</a
         >
         <a class="nav-item nav-link" href="#/persons">Personen</a>
+        <a
+          class="nav-item nav-link"
+          href="https://demo.hitobito.com/oauth/authorize?response_type=code&client_id=IEss0jc-AXKefiCiZHc2AObgt75tczmrnYxVC2YSOgA&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com"
+          >Login</a
+        >
       </div>
+      {$accessToken}
     </div>
   </nav>
 

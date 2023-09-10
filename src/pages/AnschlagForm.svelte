@@ -3,6 +3,7 @@
   import { common } from "../services/common.js";
   import { currentAnschlag } from "../stores/anschlagstore.js";
   import { stufen } from "../stores/configstore.js";
+  import { accessToken } from "../stores/userstore.js";
   import { onMount } from "svelte";
 
   let anschlag = {
@@ -48,7 +49,7 @@
       let day = String(currentDate.getDate()).padStart(2, "0");
 
       anschlag.createDate = `${year}-${month}-${day}`;
-      api.saveAnschlag(anschlag).then(() => {
+      api.saveAnschlag(anschlag, $accessToken).then(() => {
         window.location.href = "#/";
       });
     } else {

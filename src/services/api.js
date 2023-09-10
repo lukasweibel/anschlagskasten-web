@@ -51,11 +51,16 @@ export function getPersons() {
         });
 }
 
-export function saveAnschlag(anschlag) {
+export function saveAnschlag(anschlag, accessToken) {
     return new Promise((resolve, reject) => {
+
+        const headers = {
+            "Access-Token": accessToken
+        }
+
         axios
             .post(
-                baseUrl + "/anschlaege", anschlag
+                baseUrl + "/anschlaege", anschlag, { headers: headers }
             )
             .then((response) => {
                 const id = response.data;
@@ -64,6 +69,23 @@ export function saveAnschlag(anschlag) {
 
                 getAnschlaege();
                 resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
+}
+
+export function getAccessToken(code) {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(
+                baseUrl + "/security/access-token/" + code
+            )
+            .then((response) => {
+                response.data.access_token
+
+                resolve(response.data.access_token);
             })
             .catch((error) => {
                 console.error(error);
@@ -146,5 +168,6 @@ export const api = {
     getOrderedAnschlaege,
     addAnschlagToPerson,
     removeAnschlagFromPerson,
-    updateAnschlag
+    updateAnschlag,
+    getAccessToken
 };
