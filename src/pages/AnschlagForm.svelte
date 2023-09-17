@@ -19,7 +19,6 @@
     endTime: null,
     endPlace: null,
     itemsToBring: null,
-    updateToken: null,
     createDate: null,
   };
 
@@ -31,9 +30,7 @@
     if (currentUrl === "#/anschlagupdate" && $currentAnschlag) {
       newAnschlag = false;
       anschlag = $currentAnschlag;
-      anschlag.updateToken = common.getCookie(anschlag._id);
     } else if (currentUrl === "#/anschlagform") {
-      anschlag.updateToken = Math.floor(Math.random() * 1000);
       newAnschlag = true;
     } else {
       newAnschlag = true;
@@ -73,16 +70,6 @@
   {/if}
 
   <table>
-    <tr>
-      <td>Edit Pin:</td>
-      <td
-        ><input
-          type="text"
-          placeholder="Edit Pin"
-          bind:value={anschlag.updateToken}
-        /></td
-      >
-    </tr>
     <tr>
       <td>Stufe:</td>
       <td

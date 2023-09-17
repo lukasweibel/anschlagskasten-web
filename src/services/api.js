@@ -65,8 +65,6 @@ export function saveAnschlag(anschlag, accessToken) {
             .then((response) => {
                 const id = response.data;
 
-                common.setCookie(id, anschlag.updateToken);
-
                 getAnschlaege();
                 resolve(resolve);
             })

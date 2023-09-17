@@ -8,7 +8,16 @@
 
   onMount(async () => {
     api.getAnschlaege();
-    if (common.getUrlParameter("code")) {
+    if (common.getUrlParameter("stage") == "dev") {
+      alert("Stage: " + common.getUrlParameter("stage"));
+      window.location.href =
+        "http://localhost:8080?code=" + common.getUrlParameter("code");
+    }
+    if (
+      common.getUrlParameter("code") &&
+      common.getUrlParameter("stage") !== "dev"
+    ) {
+      console.log("code" + common.getUrlParameter("code"));
       api.getAccessToken(common.getUrlParameter("code")).then((response) => {
         common.removeQueryParam("code");
         $accessToken = response;
