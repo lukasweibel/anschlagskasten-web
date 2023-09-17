@@ -55,7 +55,7 @@
         <a class="nav-item nav-link" href="#/persons">Personen</a>
         <a
           class="nav-item nav-link"
-          href="https://demo.hitobito.com/oauth/authorize?response_type=code&client_id=IEss0jc-AXKefiCiZHc2AObgt75tczmrnYxVC2YSOgA&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com"
+          href="https://db.cevi.ch/oauth/authorize?response_type=code&client_id=70AEhO3TpqcvA-9shANbACuhuBR4JZ3eTypJ8HpzaxE&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com&scope=with_roles"
           >Login</a
         >
       </div>
