@@ -30,7 +30,6 @@
       <div class="nav-links">
         {#if $accessToken}
           <a href="#/anschlagform">Anschlag erstellen</a>
-          <a href="#/persons">Personen</a>
         {/if}
         {#if !$accessToken}
           <a
