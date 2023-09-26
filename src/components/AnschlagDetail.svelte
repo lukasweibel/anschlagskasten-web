@@ -1,6 +1,7 @@
 <script>
   import { currentAnschlag } from "../stores/anschlagstore.js";
   import { common } from "../services/common.js";
+  import { accessToken } from "../stores/userstore.js";
 
   function edit() {
     window.location.href = "#/anschlagupdate";
@@ -57,10 +58,11 @@
       </tbody>
     </table>
   {/if}
-
-  <button on:click|once={edit} id="editButton" class="greytext"
-    >Editieren</button
-  >
+  {#if $accessToken}
+    <button on:click|once={edit} id="editButton" class="greytext"
+      >Editieren</button
+    >
+  {/if}
 </div>
 
 <style>
