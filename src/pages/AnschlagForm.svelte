@@ -50,14 +50,9 @@
         window.location.href = "#/";
       });
     } else {
-      api
-        .updateAnschlag(anschlag)
-        .then(() => {
-          window.location.href = "#/";
-        })
-        .catch(() => {
-          alert("Falscher Update Pin");
-        });
+      api.updateAnschlag(anschlag).then(() => {
+        window.location.href = "#/";
+      });
     }
   }
 </script>

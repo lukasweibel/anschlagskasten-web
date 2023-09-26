@@ -13,7 +13,6 @@
         "http://localhost:8080?code=" + common.getUrlParameter("code");
     }
     if (common.getUrlParameter("code")) {
-      alert("Login");
       api.getAccessToken(common.getUrlParameter("code")).then((response) => {
         common.removeQueryParam("code");
         $accessToken = response;
