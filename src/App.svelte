@@ -9,15 +9,11 @@
   onMount(async () => {
     api.getAnschlaege();
     if (common.getUrlParameter("stage") == "dev") {
-      alert("Stage: " + common.getUrlParameter("stage"));
       window.location.href =
         "http://localhost:8080?code=" + common.getUrlParameter("code");
     }
-    if (
-      common.getUrlParameter("code") &&
-      common.getUrlParameter("stage") !== "dev"
-    ) {
-      console.log("code" + common.getUrlParameter("code"));
+    if (common.getUrlParameter("code")) {
+      alert("Login");
       api.getAccessToken(common.getUrlParameter("code")).then((response) => {
         common.removeQueryParam("code");
         $accessToken = response;
@@ -59,14 +55,19 @@
         <a class="nav-item nav-link active" href="#/"
           ><img src="cevilogo.png" alt="background image" height="60px" /></a
         >
-        <a class="nav-item nav-link" href="#/anschlagform">Anschlag erstellen</a
-        >
-        <a class="nav-item nav-link" href="#/persons">Personen</a>
-        <a
-          class="nav-item nav-link"
-          href="https://db.cevi.ch/oauth/authorize?response_type=code&client_id=70AEhO3TpqcvA-9shANbACuhuBR4JZ3eTypJ8HpzaxE&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com&scope=with_roles"
-          >Login</a
-        >
+        {#if $accessToken}
+          <a class="nav-item nav-link" href="#/anschlagform"
+            >Anschlag erstellen</a
+          >
+          <a class="nav-item nav-link" href="#/persons">Personen</a>
+        {/if}
+        {#if !$accessToken}
+          <a
+            class="nav-item nav-link"
+            href="https://db.cevi.ch/oauth/authorize?response_type=code&client_id=70AEhO3TpqcvA-9shANbACuhuBR4JZ3eTypJ8HpzaxE&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com&scope=with_roles"
+            >Login</a
+          >
+        {/if}
       </div>
       {$accessToken}
     </div>
