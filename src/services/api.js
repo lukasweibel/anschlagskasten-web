@@ -3,8 +3,8 @@ import { activeAnschlaege } from "../stores/anschlagstore.js";
 import { personsArray, orderedAnschlaege } from "../stores/personstore.js";
 import { common } from "./common.js";
 
-//const baseUrl = "http://localhost:8081"
-const baseUrl = "https://anschlagskasten-backend-52db9d906840.herokuapp.com"
+const baseUrl = "http://localhost:8081"
+    //const baseUrl = "https://anschlagskasten-backend-52db9d906840.herokuapp.com"
 
 export function getAnschlaege() {
     let anschlaege = [];
@@ -91,11 +91,16 @@ export function getAccessToken(code) {
     });
 }
 
-export function updateAnschlag(anschlag) {
+export function updateAnschlag(anschlag, accessToken) {
     return new Promise((resolve, reject) => {
+
+        const headers = {
+            "Access-Token": accessToken
+        }
+
         axios
             .put(
-                baseUrl + "/anschlaege", anschlag
+                baseUrl + "/anschlaege", anschlag, { headers: headers }
             )
             .then((response) => {
                 console.log(response);

@@ -68,7 +68,6 @@
           >
         {/if}
       </div>
-      {$accessToken}
     </div>
   </nav>
 

@@ -50,7 +50,7 @@
         window.location.href = "#/";
       });
     } else {
-      api.updateAnschlag(anschlag).then(() => {
+      api.updateAnschlag(anschlag, $accessToken).then(() => {
         window.location.href = "#/";
       });
     }
