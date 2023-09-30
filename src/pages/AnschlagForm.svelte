@@ -6,6 +6,9 @@
   import { accessToken } from "../stores/userstore.js";
   import { onMount } from "svelte";
 
+  let stufe;
+  let title;
+
   let anschlag = {
     _id: null,
     title: null,
@@ -38,22 +41,39 @@
   });
 
   function save() {
-    if (newAnschlag) {
-      let currentDate = new Date();
-
-      let year = currentDate.getFullYear();
-      let month = String(currentDate.getMonth() + 1).padStart(2, "0");
-      let day = String(currentDate.getDate()).padStart(2, "0");
-
-      anschlag.createDate = `${year}-${month}-${day}`;
-      api.saveAnschlag(anschlag, $accessToken).then(() => {
-        window.location.href = "#/";
-      });
+    if (stufe == "other") {
+      anschlag.title = title;
     } else {
-      api.updateAnschlag(anschlag, $accessToken).then(() => {
-        window.location.href = "#/";
-      });
+      anschlag.title = stufe;
     }
+    if (!validateForm()) {
+      alert(
+        "Bitte fülle mindestens folgende Felder aus: Stufe/Titel, Name, Datum und Begrüssung"
+      );
+    } else {
+      if (newAnschlag) {
+        let currentDate = new Date();
+
+        let year = currentDate.getFullYear();
+        let month = String(currentDate.getMonth() + 1).padStart(2, "0");
+        let day = String(currentDate.getDate()).padStart(2, "0");
+
+        anschlag.createDate = `${year}-${month}-${day}`;
+        api.saveAnschlag(anschlag, $accessToken).then(() => {
+          window.location.href = "#/";
+        });
+      } else {
+        api.updateAnschlag(anschlag, $accessToken).then(() => {
+          window.location.href = "#/";
+        });
+      }
+    }
+  }
+
+  function validateForm() {
+    return (
+      anschlag.name && anschlag.title && anschlag.introducing && anschlag.date
+    );
   }
 </script>
 
@@ -68,15 +88,23 @@
     <tr>
       <td>Stufe:</td>
       <td
-        ><select bind:value={anschlag.title}>
+        ><select bind:value={stufe}>
           {#each $stufen as stufe}
             <option value={stufe.name}>
               {stufe.name}
             </option>
           {/each}
+          <option value="other"> Sonstiger Anlass </option>
         </select></td
       ></tr
     >
+    {#if stufe == "other"}
+      <tr>
+        <td>Titel:</td><td
+          ><input type="text" placeholder="Titel" bind:value={title} /></td
+        ></tr
+      >
+    {/if}
     <tr>
       <td>Ceviname:</td><td
         ><input

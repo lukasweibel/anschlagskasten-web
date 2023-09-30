@@ -29,7 +29,7 @@
       >
       <div class="nav-links">
         {#if $accessToken}
-          <a href="#/anschlagform">Anschlag erstellen</a>
+          <a href="#/anschlagform" class="navbar-button">Anschlag erstellen</a>
         {/if}
         {#if !$accessToken}
           <a
@@ -86,6 +86,10 @@
   }
 
   @media only screen and (max-width: 768px) {
+    a {
+      font-size: 30px;
+    }
+
     #container {
       border: solid black 2px;
       display: flex;

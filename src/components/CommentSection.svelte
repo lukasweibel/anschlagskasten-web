@@ -50,6 +50,11 @@
 </div>
 
 <style>
+  .text {
+    margin-top: 0px;
+    padding-top: 16px;
+  }
+
   #container {
     background-color: rgb(177, 174, 174);
     min-height: 100%;
