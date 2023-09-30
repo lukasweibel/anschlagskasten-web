@@ -6,11 +6,9 @@
   import { accessToken } from "../stores/userstore.js";
   import { onMount } from "svelte";
 
-  let stufe;
-  let title;
-
   let anschlag = {
     _id: null,
+    stufe: null,
     title: null,
     introducing: null,
     name: null,
@@ -41,10 +39,8 @@
   });
 
   function save() {
-    if (stufe == "other") {
-      anschlag.title = title;
-    } else {
-      anschlag.title = stufe;
+    if (anschlag.stufe != "other") {
+      anschlag.title = anschlag.stufe;
     }
     if (!validateForm()) {
       alert(
@@ -88,7 +84,7 @@
     <tr>
       <td>Stufe:</td>
       <td
-        ><select bind:value={stufe}>
+        ><select bind:value={anschlag.stufe}>
           {#each $stufen as stufe}
             <option value={stufe.name}>
               {stufe.name}
@@ -98,10 +94,14 @@
         </select></td
       ></tr
     >
-    {#if stufe == "other"}
+    {#if anschlag.stufe == "other"}
       <tr>
         <td>Titel:</td><td
-          ><input type="text" placeholder="Titel" bind:value={title} /></td
+          ><input
+            type="text"
+            placeholder="Titel"
+            bind:value={anschlag.title}
+          /></td
         ></tr
       >
     {/if}
