@@ -19,6 +19,10 @@
       });
     }
   });
+
+  function pageInIframe() {
+    return window.location !== window.parent.location;
+  }
 </script>
 
 <div id="container">
@@ -29,12 +33,17 @@
       >
       <div class="nav-links">
         {#if $accessToken}
-          <a href="#/anschlagform" class="navbar-button">Anschlag erstellen</a>
+          <a href="#/anschlagform" class="navbar-button">Erstellen</a>
         {/if}
         {#if !$accessToken}
           <a
             href="https://db.cevi.ch/oauth/authorize?response_type=code&client_id=70AEhO3TpqcvA-9shANbACuhuBR4JZ3eTypJ8HpzaxE&redirect_uri=https://anschlagskasten-web-fd337ce2917a.herokuapp.com&scope=with_roles"
             >Login</a
+          >
+        {/if}
+        {#if pageInIframe}
+          <a href="https://anschlagskasten-web-fd337ce2917a.herokuapp.com"
+            >Anschlag erstellen</a
           >
         {/if}
       </div>
