@@ -27,15 +27,19 @@
 
 <div id="content">
   <div id="sidebar" class="col-3 col-s-12">
-    {#each anschlaege as anschlag}
-      <div transition:slide|local>
-        <AnschlagItem
-          title={anschlag.title}
-          id={anschlag._id}
-          on:click={() => choose(anschlag._id)}
-        />
-      </div>
-    {/each}
+    {#if anschlaege.length > 0}
+      {#each anschlaege as anschlag}
+        <div transition:slide|local>
+          <AnschlagItem
+            title={anschlag.title}
+            id={anschlag._id}
+            on:click={() => choose(anschlag._id)}
+          />
+        </div>
+      {/each}
+    {:else}
+      <div>Keine Anschläge vorhanden</div>
+    {/if}
   </div>
   {#if anschlag != null}
     <div id="details" class="col-6 col-s-12">
