@@ -38,6 +38,11 @@
           >
         {/if}
       </div>
+      {#if common.getUrlParameter("mode") == "advanced"}
+        <div class="nav-links">
+          <a href="#/abonnieren" class="navbar-button">Abonnieren</a>
+        </div>
+      {/if}
     </div>
   </nav>
 

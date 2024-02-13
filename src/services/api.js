@@ -162,6 +162,69 @@ export function removeAnschlagFromPerson(personId, anschlagId) {
     });
 }
 
+export function getLoginCode(phoneNumber) {
+    const params = new URLSearchParams();
+    params.append('phoneNumber', phoneNumber);
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    };
+
+    return new Promise((resolve, reject) => {
+        axios.post(`${baseUrl}/notification`, params, config)
+            .then(response => {
+                console.log(response); // Log or handle the response as needed
+                resolve(response);
+            })
+            .catch(error => {
+                console.error(error); // Log or handle the error as needed
+                reject(error);
+            });
+    });
+}
+
+export function validateLoginCode(phoneNumber, code) {
+    const params = new URLSearchParams();
+    params.append('phoneNumber', phoneNumber);
+    params.append('code', code)
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    };
+
+    return new Promise((resolve, reject) => {
+        axios.post(`${baseUrl}/notification/validate`, params, config)
+            .then(response => {
+                console.log(response); // Log or handle the response as needed
+                resolve(response);
+            })
+            .catch(error => {
+                console.error(error); // Log or handle the error as needed
+                reject(error);
+            });
+    });
+}
+
+export function saveContact(contact, code) {
+    return new Promise((resolve, reject) => {
+
+        axios
+            .post(
+                baseUrl + "/notification/contact", contact
+            )
+            .then((response) => {
+                resolve(resolve);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    });
+}
+
 export const api = {
     getAnschlaege,
     getPersons,
@@ -171,5 +234,8 @@ export const api = {
     addAnschlagToPerson,
     removeAnschlagFromPerson,
     updateAnschlag,
-    getAccessToken
+    getAccessToken,
+    getLoginCode,
+    validateLoginCode,
+    saveContact
 };

@@ -1,6 +1,5 @@
 <script>
   import { api } from "../services/api.js";
-  import { common } from "../services/common.js";
   import { currentAnschlag } from "../stores/anschlagstore.js";
   import { stufen } from "../stores/configstore.js";
   import { accessToken } from "../stores/userstore.js";
